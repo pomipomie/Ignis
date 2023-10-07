@@ -5,10 +5,13 @@ import RegisterForm from './components/RegisterForm';
 import { Button } from '@chakra-ui/button';
 import LoginForm from './components/LoginForm';
 import { Flex } from '@chakra-ui/layout';
+import phoneActions from './actions/phone';
+import PhoneForm from './components/PhoneForm';
 
 function App() {
   // const [count, setCount] = useState(0)
   const {signout} = authActions()
+  const {addPhone} = phoneActions()
 
   return (
     <Container
@@ -26,6 +29,7 @@ function App() {
         <LoginForm/>
         <Button onClick={signout}>Cerrar Sesion</Button>
       </Flex>
+      <PhoneForm/>
     </Container>
   )
 }

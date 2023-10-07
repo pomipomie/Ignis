@@ -48,10 +48,14 @@ const RegisterForm = () =>{
           </ModalBody>
 
           <ModalFooter display="flex" flexDirection="column" gap="2" mt="4">
-            <Button colorScheme="blue" w="60%" onClick={(e)=> handleSignUp("email")}>Sign Up</Button>
+            <Button colorScheme="blue" w="60%" onClick={(e)=> {
+              handleSignUp("email")
+              onClose()
+            }}>Sign Up</Button>
             <Text>or</Text>
             <Button w="60%" onClick={()=>{
               handleSignUp("guest")
+              onClose()
             }}>
               continue as a guest
             </Button>

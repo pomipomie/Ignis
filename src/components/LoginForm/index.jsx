@@ -48,10 +48,14 @@ const LoginForm = () =>{
           </ModalBody>
 
           <ModalFooter display="flex" flexDirection="column" gap="2" mt="4">
-            <Button colorScheme="blue" w="60%" onClick={(e)=> handleSignIn("email")}>Login</Button>
+            <Button colorScheme="blue" w="60%" onClick={(e)=> {
+              handleSignIn("email")
+              onClose()
+            }}>Login</Button>
             <Text>or</Text>
             <Button w="60%" onClick={()=>{
               handleSignIn("guest")
+              onClose()
             }}>
               continue as a guest
             </Button>
