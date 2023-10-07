@@ -5,19 +5,15 @@ export const AuthContext = createContext()
 
 export function AuthProvider({children}){
   const [user, setUser] = useState(null)
-
-  async function authenticateWithEmail(email,password){
-    const response = await AuthActions.withEmailAndPassword()
-    setUser(response)
-  }
+  const [authError,setAuthError] = useState("");
 
   return(
     <AuthContext.Provider
       value={{
         user,
-        signOut,
-        authenticateWithEmail,
-        authenticateAnonimous,
+        setUser,
+        authError,
+        setAuthError,
       }}
     >
       {children}
