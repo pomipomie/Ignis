@@ -11,7 +11,7 @@ import {
 import { useState } from 'react';
 
 import { useAuth } from '../providers/AuthProvider';
-import {auth} from "../firebase/firebase.config"
+import {auth} from "../firebase/firebase.config.Js"
 
 const authActions = () => {
   const { setUser, authError, setAuthError } = useAuth();
@@ -20,13 +20,12 @@ const authActions = () => {
   const [signUpEmail, setSignUpEmail] = useState('');
   const [signUpPassword, setSignUpPassword] = useState('');
 
-  const handleSignIn = async (signInMethod, e = {}) => {
+  const handleSignIn = async (signInMethod) => {
     const auth = getAuth();
 
     try {
       switch (signInMethod) {
         case 'email':
-          e.preventDefault();
           await signInWithEmailAndPassword(auth, signInEmail, signInPassword);
           setAuthError('');
           break;
@@ -45,13 +44,12 @@ const authActions = () => {
     }
   };
 
-  const handleSignUp = async (signUpMethod, event = {}) => {
+  const handleSignUp = async (signUpMethod) => {
     const auth = getAuth();
 
     try {
       switch (signUpMethod) {
         case 'email':
-          event.preventDefault();
           await createUserWithEmailAndPassword(
             auth,
             signUpEmail,
@@ -76,7 +74,10 @@ const authActions = () => {
 
   const signout = () => signOut(auth);
 
-  onAuthStateChanged(auth, (currentUser) => setUser(currentUser));
+  onAuthStateChanged(auth, (currentUser) => {
+    console.log(currentUser)
+    setUser(currentUser)
+  });
 
   return {
     signInEmail,
