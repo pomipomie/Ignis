@@ -1,21 +1,21 @@
 import { useToast } from "@chakra-ui/toast";
-import { doc,setDoc } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import { db } from "../firebase/firebase.config.Js";
 import { useAuth } from "../providers/AuthProvider";
 
-const phoneActions = ()=>{
+
+const interestPointActions = ()=>{
+
   const toast = useToast()
   const {user} = useAuth()
-  const addPhone = async (phoneNumber)=>{
 
+  const addInterestPoint = async (payload)=>{
     try{
 
       if(!user?.uid) throw "no user id"
-      await setDoc(doc(db,"phones",user.uid),{
-        phone: phoneNumber
-      })
+      await addDoc(collection(db,"interestPoints"),{...payload,userId:user.uid})
       toast({
-        title: 'Phone created.',
+        title: 'Point created.',
         description: "Done",
         status: 'success',
         duration: 9000,
@@ -23,10 +23,11 @@ const phoneActions = ()=>{
 
       })
     }catch(e){
-      throw (e)
+      throw e
     }
   }
-  return { addPhone }
+
+  return {addInterestPoint}
 }
 
-export default phoneActions
+export default interestPointActions

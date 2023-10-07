@@ -44,7 +44,7 @@ const PhoneForm = () =>{
 
   return(
     <>
-      <Button onClick={onOpen} mt="8">
+      <Button onClick={onOpen}>
         Set Phone
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>

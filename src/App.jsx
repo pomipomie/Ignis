@@ -7,6 +7,7 @@ import LoginForm from './components/LoginForm';
 import { Flex } from '@chakra-ui/layout';
 import phoneActions from './actions/phone';
 import PhoneForm from './components/PhoneForm';
+import InterestPointForm from './components/InterestPointForm';
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -29,7 +30,10 @@ function App() {
         <LoginForm/>
         <Button onClick={signout}>Cerrar Sesion</Button>
       </Flex>
-      <PhoneForm/>
+      <Flex mt="8" gap="4">
+        <PhoneForm/>
+        <InterestPointForm/>
+      </Flex>
     </Container>
   )
 }
