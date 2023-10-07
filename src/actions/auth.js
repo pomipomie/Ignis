@@ -1,25 +1,98 @@
-import axios from "axios";
+import {
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  getAuth,
+  onAuthStateChanged,
+  signInAnonymously,
+  signInWithEmailAndPassword,
+  signOut,
+  signInWithPopup,
+} from 'firebase/auth';
+import { useState } from 'react';
 
-async function withEmailAndPassword(){
-  try{
-    const response = axios.post("");
-  } catch(e){
-    throw e;
-  }
-}
+import { useAuth } from '../providers/AuthProvider';
+import {auth} from "../firebase/firebase.config"
 
-async function anonimous(){
-  try{
-    const response = axios.post("");
+const authActions = () => {
+  const { setUser, authError, setAuthError } = useAuth();
+  const [signInEmail, setSignInEmail] = useState('');
+  const [signInPassword, setSignInPassword] = useState('');
+  const [signUpEmail, setSignUpEmail] = useState('');
+  const [signUpPassword, setSignUpPassword] = useState('');
 
-  }catch(e){
-    throw e;
-  }
-}
+  const handleSignIn = async (signInMethod, e = {}) => {
+    const auth = getAuth();
 
-const AuthActions = {
-  withEmailAndPassword,
-  anonimous,
+    try {
+      switch (signInMethod) {
+        case 'email':
+          e.preventDefault();
+          await signInWithEmailAndPassword(auth, signInEmail, signInPassword);
+          setAuthError('');
+          break;
+
+        case 'guest':
+          await signInAnonymously(auth);
+          setAuthError('');
+          break;
+
+        default:
+          return;
+      }
+    } catch (error) {
+      setAuthError(error?.code);
+      console.error(error?.code);
+    }
+  };
+
+  const handleSignUp = async (signUpMethod, event = {}) => {
+    const auth = getAuth();
+
+    try {
+      switch (signUpMethod) {
+        case 'email':
+          event.preventDefault();
+          await createUserWithEmailAndPassword(
+            auth,
+            signUpEmail,
+            signUpPassword
+          );
+          setAuthError('');
+          break;
+
+        case 'guest':
+          await signInAnonymously(auth);
+          setAuthError('');
+          break;
+
+        default:
+          return;
+      }
+    } catch (error) {
+      setAuthError(error?.code);
+      console.error(error?.code);
+    }
+  };
+
+  const signout = () => signOut(auth);
+
+  onAuthStateChanged(auth, (currentUser) => setUser(currentUser));
+
+  return {
+    signInEmail,
+    setSignInEmail,
+    signInPassword,
+    setSignInPassword,
+    signUpEmail,
+    setSignUpEmail,
+    signUpPassword,
+    setSignUpPassword,
+    authError,
+    setAuthError,
+    handleSignIn,
+    handleSignUp,
+    signout,
+  };
 };
 
-export default AuthActions;
+export default authActions;
