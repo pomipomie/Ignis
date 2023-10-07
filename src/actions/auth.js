@@ -41,7 +41,7 @@ const authActions = () => {
       }
     } catch (error) {
       setAuthError(error?.code);
-      console.error(error?.code);
+      console.error(error);
     }
   };
 
@@ -70,7 +70,7 @@ const authActions = () => {
       }
     } catch (error) {
       setAuthError(error?.code);
-      console.error(error?.code);
+      console.error(error);
     }
   };
 

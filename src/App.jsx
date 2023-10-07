@@ -5,14 +5,6 @@ import authActions from './actions/auth'
 
 function App() {
   // const [count, setCount] = useState(0)
-  const {signInEmail,
-    setSignInEmail,
-    signInPassword,
-    setSignInPassword,
-    signUpEmail,
-    setSignUpEmail,
-    signUpPassword,
-    setSignUpPassword,handleSignUp} = authActions()
 
   return (
     <Container>
