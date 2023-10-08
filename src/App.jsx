@@ -8,12 +8,14 @@ import phoneActions from './actions/phone';
 import PhoneForm from './components/PhoneForm';
 import InterestPointForm from './components/InterestPointForm';
 import { HeaderButton } from './components/HeaderButton';
+import { Dashboard } from './components/Dashboard';
 
 function App() {
   const {signout} = authActions();
   const {addPhone} = phoneActions();
 
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [showDashboard, setShowDashboard] = useState(false);
 
   let scrollableElement = document.body;
 
@@ -54,27 +56,37 @@ function App() {
         <Heading
           color={'purple.100'}
           paddingY="2vh"
+          fontFamily="'Tektur', monospace"
+          fontSize='2em'
         >
-          IGNIS APP
+          IGNIS
         </Heading>
         <Flex 
-        as='nav'
-        wrap="wrap"
-        justifyContent="center"
-        paddingX="1vw"
-        paddingY={2}
-        gap={2}
-        // backgroundColor={'purple.200'}
-      >
-        <RegisterForm/>
+          as='nav'
+          wrap="wrap"
+          justifyContent="center"
+          paddingX="1vw"
+          paddingTop={2}
+          paddingBottom={4}
+          gap={2}
+        >
+          <RegisterForm/>
           <LoginForm/>
           <HeaderButton
-             onClick={signout}
-             title="Log out"
+            onClick={signout}
+            title="Log out"
           />
-        <PhoneForm/>
-        <InterestPointForm/>
+          <PhoneForm/>
+          <InterestPointForm/>
+          <HeaderButton
+            onClick={() => setShowDashboard(!showDashboard)}
+            title={showDashboard ? "Back Home" : "Dashboard"}
+          />
+        </Flex>
       </Flex>
+      <Flex>
+        { !showDashboard && <Flex>Project description goes here</Flex>}
+        { showDashboard && <Dashboard/>}
       </Flex>
     </Flex>
   )
