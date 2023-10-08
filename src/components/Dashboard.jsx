@@ -3,7 +3,9 @@ import { Flex, Tabs, TabList, Tab, TabPanels, TabPanel, Card, CardHeader, CardBo
 
 const DashboardCard = ({title, content}) => {
     return(
-        <Card>
+        <Card
+            variant="filled"
+        >
             <CardHeader>
                 {title}
             </CardHeader>
@@ -53,7 +55,12 @@ export const Dashboard =  () => {
                     overflowY="scroll"
                     maxH="100%"
                 >
-                    <TabPanel>
+                    <TabPanel
+                        display="flex"
+                        flexWrap="wrap"
+                        gap={2}
+                        justifyContent="center"
+                    >
                         { cardContents.map( (card, index) => 
                             (<DashboardCard
                                 key={index}

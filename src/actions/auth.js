@@ -11,7 +11,7 @@ import {
 import { useState } from 'react';
 
 import { useAuth } from '../providers/AuthProvider';
-import {auth} from "../firebase/firebase.config.Js"
+import {auth} from "../firebase/firebase.config.js"
 import { useToast } from '@chakra-ui/toast';
 
 const authActions = () => {
