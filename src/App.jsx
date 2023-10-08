@@ -35,7 +35,7 @@ function App() {
 
   return (
     <Flex
-      h="100vh"
+      minH="100vh"
       w="100vw"
       overflow="hidden"
       padding={0}
@@ -87,7 +87,7 @@ function App() {
           />
         </Flex>
       </Flex>
-      <Flex maxW="100%" maxH="75vh" justify="center">
+      <Flex maxW="100%" alignSelf="flex-end" minH="100%" overflowY="auto" justify="center">
         { !user && <Project /> }
         { !showDashboard && user && <Project/>}
         { showDashboard && user && <Dashboard/>}
