@@ -20,29 +20,28 @@ const PhoneForm = () =>{
   const toast = useToast()
   const {user} = useAuth()
 
+  const handleClose = ()=>{
+    setPhone("")
+    onClose()
+  }
 
-  const handleAddPhone = async ()=>{
-    if(phone[0] !== "+"){
-      return toast({
-        title: 'Error.',
-          description: "Phone number invalid",
-          status: 'error',
-          duration: 9000,
-          isClosable: true,
-      })
-    }
-    try{
-      await addPhone(phone.replace(" ",""))
-      setPhone("")
-      onClose()
-    }catch(e){
-      toast({
-        title: 'Error',
-        description: e,
+  const handleError = (message)=>{
+    return toast({
+      title: 'Error.',
+        description: message,
         status: 'error',
         duration: 9000,
         isClosable: true,
-      })
+    })
+  }
+
+  const handleAddPhone = async ()=>{
+    if(phone[0] !== "+") return handleError("Phone number invalid")
+    try{
+      await addPhone(phone.replace(" ",""))
+      handleClose()
+    }catch(e){
+      handleError(e?.message || e)
     }
   }
 
@@ -53,7 +52,7 @@ const PhoneForm = () =>{
           title="Set Phone"
           isHidden={!user?.uid}
       />
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={handleClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton />
