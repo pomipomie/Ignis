@@ -12,6 +12,7 @@ import { useState } from 'react';
 
 import { useAuth } from '../providers/AuthProvider';
 import {auth} from "../firebase/firebase.config.Js"
+import { useToast } from '@chakra-ui/toast';
 
 const authActions = () => {
   const { setUser, authError, setAuthError } = useAuth();
@@ -19,6 +20,7 @@ const authActions = () => {
   const [signInPassword, setSignInPassword] = useState('');
   const [signUpEmail, setSignUpEmail] = useState('');
   const [signUpPassword, setSignUpPassword] = useState('');
+  const toast = useToast()
 
   const handleSignIn = async (signInMethod) => {
     const auth = getAuth();
@@ -27,20 +29,16 @@ const authActions = () => {
       switch (signInMethod) {
         case 'email':
           await signInWithEmailAndPassword(auth, signInEmail, signInPassword);
-          setAuthError('');
           break;
 
         case 'guest':
           await signInAnonymously(auth);
-          setAuthError('');
           break;
-
         default:
           return;
       }
     } catch (error) {
-      setAuthError(error?.code);
-      console.error(error);
+      throw error
     }
   };
 
@@ -55,27 +53,31 @@ const authActions = () => {
             signUpEmail,
             signUpPassword
           );
-          setAuthError('');
           break;
 
         case 'guest':
           await signInAnonymously(auth);
-          setAuthError('');
           break;
 
         default:
           return;
       }
     } catch (error) {
-      setAuthError(error?.code);
-      console.error(error);
+      throw error
     }
   };
 
-  const signout = () => signOut(auth);
+  const signout = () => signOut(auth).then(()=>{
+    toast({
+      title: 'Done',
+      description: "Log out success",
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+    });
+  });
 
   onAuthStateChanged(auth, (currentUser) => {
-    console.log(currentUser)
     setUser(currentUser)
   });
 

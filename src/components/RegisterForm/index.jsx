@@ -7,17 +7,52 @@ import authActions from '../../actions/auth';
 import { Text } from "@chakra-ui/layout";
 import { HeaderButton } from "../HeaderButton";
 
+import { useToast } from "@chakra-ui/toast";
 
 const RegisterForm = () =>{
   const {isOpen,onOpen,onClose} = useDisclosure();
+  const toast = useToast()
   const {
     signUpEmail,
     setSignUpEmail,
     signUpPassword,
     setSignUpPassword,
-    authError,
     handleSignUp
   } = authActions()
+  
+  const handleError = (message)=>{
+    return toast({
+      title: 'Error.',
+      description: message,
+      status: 'error',
+      duration: 9000,
+      isClosable: true,
+    })
+  }
+
+  const handleRegister = async (type)=>{
+
+    if(type === "email"){
+      if(signUpEmail == "") return 
+      if(signUpPassword == "") return 
+    }
+
+    try{
+      await handleSignUp(type)
+      toast({
+        title: 'Done',
+        description: "Signup success",
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      });
+      onClose();
+      setSignUpEmail("")
+      setSignUpPassword("")
+    }catch(e){
+      handleError(e?.message)
+    }
+  }
 
   return(
     <>
@@ -31,7 +66,7 @@ const RegisterForm = () =>{
           <ModalHeader>SIGN UP</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <FormControl>
+            <FormControl isRequired>
               <FormLabel>Email</FormLabel>
               <Input
                 type="email"
@@ -39,7 +74,7 @@ const RegisterForm = () =>{
                 value={signUpEmail}
               />
             </FormControl>
-            <FormControl>
+            <FormControl isRequired>
               <FormLabel>Password</FormLabel>
               <Input
                 type="password"
@@ -50,15 +85,9 @@ const RegisterForm = () =>{
           </ModalBody>
 
           <ModalFooter display="flex" flexDirection="column" gap="2" mt="4">
-            <Button colorScheme="blue" w="60%" onClick={(e)=> {
-              handleSignUp("email")
-              onClose()
-            }}>Sign Up</Button>
+            <Button colorScheme="blue" w="60%" onClick={()=> handleRegister("email")}>Sign Up</Button>
             <Text>or</Text>
-            <Button w="60%" onClick={()=>{
-              handleSignUp("guest")
-              onClose()
-            }}>
+            <Button w="60%" onClick={()=> handleRegister("guest")}>
               continue as a guest
             </Button>
           </ModalFooter>

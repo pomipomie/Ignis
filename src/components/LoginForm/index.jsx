@@ -6,6 +6,7 @@ import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHea
 import authActions from '../../actions/auth';
 import { Text } from "@chakra-ui/layout";
 import { HeaderButton } from "../HeaderButton";
+import { useToast } from "@chakra-ui/toast";
 
 
 const LoginForm = () =>{
@@ -15,9 +16,43 @@ const LoginForm = () =>{
     setSignInEmail,
     signInPassword,
     setSignInPassword,
-    authError,
     handleSignIn
   } = authActions()
+  const toast = useToast()
+
+  const handleError = (message)=>{
+    return toast({
+      title: 'Error.',
+      description: message,
+      status: 'error',
+      duration: 9000,
+      isClosable: true,
+    })
+  }
+
+  const handleLogin = async (type)=>{
+
+    if(type === "email"){
+      if(signInEmail === "") return 
+      if(signInPassword === "") return 
+    }
+
+    try{
+      await handleSignIn(type)
+      toast({
+        title: 'Done',
+        description: "Login success",
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      });
+      onClose();
+      setSignInEmail("")
+      setSignInPassword("")
+    }catch(e){
+      handleError(e?.message)
+    }
+  }
 
   return(
     <>
@@ -31,7 +66,7 @@ const LoginForm = () =>{
           <ModalHeader>LOGIN</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <FormControl>
+            <FormControl isRequired>
               <FormLabel>Email</FormLabel>
               <Input
                 type="email"
@@ -39,7 +74,7 @@ const LoginForm = () =>{
                 value={signInEmail}
               />
             </FormControl>
-            <FormControl>
+            <FormControl isRequired>
               <FormLabel>Password</FormLabel>
               <Input
                 type="password"
@@ -50,15 +85,9 @@ const LoginForm = () =>{
           </ModalBody>
 
           <ModalFooter display="flex" flexDirection="column" gap="2" mt="4">
-            <Button colorScheme="blue" w="60%" onClick={(e)=> {
-              handleSignIn("email")
-              onClose()
-            }}>Login</Button>
+            <Button colorScheme="blue" w="60%" onClick={()=> handleLogin("email")}>Login</Button>
             <Text>or</Text>
-            <Button w="60%" onClick={()=>{
-              handleSignIn("guest")
-              onClose()
-            }}>
+            <Button w="60%" onClick={()=> handleLogin("guest")}>
               continue as a guest
             </Button>
           </ModalFooter>

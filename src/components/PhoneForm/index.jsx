@@ -34,11 +34,11 @@ const PhoneForm = () =>{
       onClose()
     }catch(e){
       toast({
-        title: 'Error.',
-          description: e,
-          status: 'error',
-          duration: 9000,
-          isClosable: true,
+        title: 'Error',
+        description: e,
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
       })
     }
   }
