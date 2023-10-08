@@ -9,6 +9,7 @@ import InterestPointForm from './components/InterestPointForm';
 import { HeaderButton } from './components/HeaderButton';
 import { Dashboard } from './components/Dashboard';
 import { useAuth } from './providers/AuthProvider';
+import { Project } from './components/Project';
 
 function App() {
   const {signout} = authActions();
@@ -34,7 +35,7 @@ function App() {
 
   return (
     <Flex
-      h="100vh"
+      minH="100vh"
       w="100vw"
       overflow="hidden"
       padding={0}
@@ -46,7 +47,7 @@ function App() {
       <Flex 
         id='header'
         height={`${100-scrollPosition*10}vh`}
-        minH="max-content"
+        minH="25vh"
         maxH="100vh"
         overflow="hidden"
         justifyContent="center"
@@ -86,9 +87,9 @@ function App() {
           />
         </Flex>
       </Flex>
-      <Flex maxH={"60%"}>
-        { !user && <Flex>Project description goes here</Flex>}
-        { !showDashboard && user && <Flex>Project description goes here</Flex>}
+      <Flex maxW="100%" alignSelf="flex-end" minH="100%" overflowY="auto" justify="center">
+        { !user && <Project /> }
+        { !showDashboard && user && <Project/>}
         { showDashboard && user && <Dashboard/>}
       </Flex>
     </Flex>

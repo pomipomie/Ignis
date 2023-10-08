@@ -30,7 +30,7 @@ body {
 } */
 
 #header {
-  background-image: url('./assets/banner.png');
+  background-image: url('./assets/banner.webp');
   background-position-x: center;
   /* height: max-content; */
   background-size: cover;
