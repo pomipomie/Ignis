@@ -20,11 +20,19 @@ const InterestPointForm = () =>{
   const [radius,setRadius] = useState("")
   
 
-  
+  const handleError = (message)=>{
+    return toast({
+      title: 'Error.',
+      description: message,
+      status: 'error',
+      duration: 9000,
+      isClosable: true,
+    })
+  }
 
   const handleAddInterestPoint = async()=>{
 
-    if(label == "") return
+    if(label == "") return handleError("label can not be empty")
     if(isNaN(lat) || isNaN(lng) || isNaN(radius)) return
 
     try{
@@ -38,13 +46,7 @@ const InterestPointForm = () =>{
       onClose()
 
     }catch(e){
-      toast({
-        title: 'Error.',
-          description: e,
-          status: 'error',
-          duration: 9000,
-          isClosable: true,
-      })
+      handleError(e.message)
     }
   }
 

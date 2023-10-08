@@ -10,20 +10,19 @@ const phoneActions = ()=>{
 
     try{
 
-      if(!user?.uid) throw "no user id"
+      if(!user?.uid) throw "Login Required"
       await setDoc(doc(db,"phones",user.uid),{
         phone: phoneNumber
       })
       toast({
-        title: 'Phone created.',
-        description: "Done",
+        title: 'Done',
+        description: "Phone created",
         status: 'success',
         duration: 9000,
         isClosable: true,
-
       })
     }catch(e){
-      throw (e)
+      throw e
     }
   }
   return { addPhone }

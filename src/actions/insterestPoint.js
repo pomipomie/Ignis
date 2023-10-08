@@ -12,15 +12,14 @@ const interestPointActions = ()=>{
   const addInterestPoint = async (payload)=>{
     try{
 
-      if(!user?.uid) throw "no user id"
+      if(!user?.uid) throw "Login Required"
       await addDoc(collection(db,"interestPoints"),{...payload,userId:user.uid})
       toast({
-        title: 'Point created.',
-        description: "Done",
+        title: 'Done',
+        description: "Point created",
         status: 'success',
         duration: 9000,
         isClosable: true,
-
       })
     }catch(e){
       throw e
