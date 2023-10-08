@@ -32,6 +32,12 @@ const LoginForm = () =>{
     })
   }
 
+  const handleClose = ()=>{
+    setSignInEmail("")
+    setSignInPassword("")
+    onClose()
+  }
+
   const handleLogin = async (type)=>{
 
     if(type === "email"){
@@ -48,9 +54,7 @@ const LoginForm = () =>{
         duration: 9000,
         isClosable: true,
       });
-      onClose();
-      setSignInEmail("")
-      setSignInPassword("")
+      handleClose()
     }catch(e){
       handleError(e?.message)
     }
@@ -63,7 +67,7 @@ const LoginForm = () =>{
           onClick={onOpen}
           title="Login"
       />
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={handleClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>LOGIN</ModalHeader>

@@ -32,6 +32,14 @@ const InterestPointForm = () =>{
     })
   }
 
+  const handleClose = ()=>{
+    setLabel("")
+    setLat("")
+    setLng("")
+    setRadius("")
+    onClose()
+  }
+
   const handleAddInterestPoint = async()=>{
     if(label == "") return handleError("label can not be empty")
     if(lat == "" || lng == "" || radius == "") return handleError("")
@@ -45,11 +53,7 @@ const InterestPointForm = () =>{
         radius:radius
       }
       await addInterestPoint(interestPoint)
-      onClose()
-      setLabel("")
-      setLat("")
-      setLng("")
-      setRadius("")
+      handleClose()
     }catch(e){
       handleError(e?.message || e)
     }
@@ -62,7 +66,7 @@ const InterestPointForm = () =>{
         title="Set interest point"
         isHidden={!user?.uid}
       />
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={handleClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader></ModalHeader>

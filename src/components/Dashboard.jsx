@@ -52,7 +52,7 @@ export const Dashboard =  () => {
                 </TabList>
 
                 <TabPanels
-                    overflowY="scroll"
+                    overflowY="auto"
                     maxH="100%"
                 >
                     <TabPanel
