@@ -87,8 +87,9 @@ function App() {
         </Flex>
       </Flex>
       <Flex maxH={"60%"}>
-        { !showDashboard && <Flex>Project description goes here</Flex>}
-        { showDashboard && <Dashboard/>}
+        { !user && <Flex>Project description goes here</Flex>}
+        { !showDashboard && user && <Flex>Project description goes here</Flex>}
+        { showDashboard && user && <Dashboard/>}
       </Flex>
     </Flex>
   )
