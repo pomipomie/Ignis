@@ -31,9 +31,9 @@ const InterestPointForm = () =>{
   }
 
   const handleAddInterestPoint = async()=>{
-
     if(label == "") return handleError("label can not be empty")
-    if(isNaN(lat) || isNaN(lng) || isNaN(radius)) return
+    if(lat == "" || lng == "" || radius == "") return handleError("")
+    if(isNaN(lat) || isNaN(lng) || isNaN(radius)) return handleError("")
 
     try{
       const interestPoint = {
@@ -44,9 +44,12 @@ const InterestPointForm = () =>{
       }
       await addInterestPoint(interestPoint)
       onClose()
-
+      setLabel("")
+      setLat("")
+      setLng("")
+      setRadius("")
     }catch(e){
-      handleError(e.message)
+      handleError(e?.message || e)
     }
   }
 
