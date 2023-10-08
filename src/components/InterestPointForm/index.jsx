@@ -6,12 +6,13 @@ import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHea
 import { useState } from "react";
 import interestPointActions from "../../actions/insterestPoint";
 import { useToast } from "@chakra-ui/toast";
+import { HeaderButton } from "../HeaderButton";
 
 
 const InterestPointForm = () =>{
   const {isOpen,onOpen,onClose} = useDisclosure();
   const {addInterestPoint} = interestPointActions()
-  const toast = useToast()
+  const toast = useToast();
 
   const [label,setLabel] = useState("")
   const [lat,setLat] = useState("")
@@ -49,9 +50,10 @@ const InterestPointForm = () =>{
 
   return(
     <>
-      <Button onClick={onOpen}>
-        Set interest point
-      </Button>
+      <HeaderButton
+        onClick={onOpen}
+        title="Set interest point"
+      />
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

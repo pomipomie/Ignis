@@ -16,4 +16,28 @@
 
 body {
   margin: 0;
+  padding: 0;
+  width: 100vw;
+}
+
+/* #container {
+  background-image: url('./assets/banner.png');
+  background-size: cover;
+  background-attachment: scroll;
+  background-position-x: right;
+} */
+
+#header {
+  background-image: url('./assets/banner.png');
+  background-position-x: center;
+  /* height: max-content; */
+  background-size: cover;
+  background-attachment: scroll;
+  position: sticky;
+  width: 100%;
+  min-width: 100vw;
+  padding: 10vh auto;
+  margin: 0;
+  overflow-x: hidden;
+  transition: .5s linear;
 }

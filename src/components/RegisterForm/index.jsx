@@ -5,6 +5,7 @@ import { Input } from "@chakra-ui/input";
 import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from "@chakra-ui/modal"
 import authActions from '../../actions/auth';
 import { Text } from "@chakra-ui/layout";
+import { HeaderButton } from "../HeaderButton";
 
 
 const RegisterForm = () =>{
@@ -20,9 +21,10 @@ const RegisterForm = () =>{
 
   return(
     <>
-      <Button onClick={onOpen}>
-        Sign Up
-      </Button>
+      <HeaderButton
+          onClick={onOpen}
+          title="Sign Up"
+      />
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

@@ -6,6 +6,7 @@ import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHea
 import phoneActions from "../../actions/phone";
 import { useState } from "react";
 import { useToast } from "@chakra-ui/toast";
+import { HeaderButton } from '../HeaderButton';
 
 
 const PhoneForm = () =>{
@@ -44,9 +45,10 @@ const PhoneForm = () =>{
 
   return(
     <>
-      <Button onClick={onOpen}>
-        Set Phone
-      </Button>
+      <HeaderButton
+          onClick={onOpen}
+          title="Set Phone"
+      />
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
