@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import { Button } from '@chakra-ui/react';
 
-export const HeaderButton = ({onClick, title,isHidden}) => {
+export const HeaderButton = ({onClick, title, isHidden}) => {
 
     return(
         <Button

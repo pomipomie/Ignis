@@ -86,7 +86,7 @@ function App() {
           />
         </Flex>
       </Flex>
-      <Flex>
+      <Flex maxH={"60%"}>
         { !showDashboard && <Flex>Project description goes here</Flex>}
         { showDashboard && <Dashboard/>}
       </Flex>
