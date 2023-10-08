@@ -4,14 +4,14 @@ import authActions from './actions/auth';
 import RegisterForm from './components/RegisterForm';
 import LoginForm from './components/LoginForm';
 import { Flex } from '@chakra-ui/layout';
-import phoneActions from './actions/phone';
 import PhoneForm from './components/PhoneForm';
 import InterestPointForm from './components/InterestPointForm';
 import { HeaderButton } from './components/HeaderButton';
+import { useAuth } from './providers/AuthProvider';
 
 function App() {
   const {signout} = authActions();
-  const {addPhone} = phoneActions();
+  const {user} = useAuth()
 
   const [scrollPosition, setScrollPosition] = useState(0);
 
@@ -71,6 +71,7 @@ function App() {
           <HeaderButton
              onClick={signout}
              title="Log out"
+             isHidden={!user}
           />
         <PhoneForm/>
         <InterestPointForm/>

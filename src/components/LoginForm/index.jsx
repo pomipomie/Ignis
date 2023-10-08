@@ -7,6 +7,7 @@ import authActions from '../../actions/auth';
 import { Text } from "@chakra-ui/layout";
 import { HeaderButton } from "../HeaderButton";
 import { useToast } from "@chakra-ui/toast";
+import { useAuth } from "../../providers/AuthProvider";
 
 
 const LoginForm = () =>{
@@ -19,6 +20,7 @@ const LoginForm = () =>{
     handleSignIn
   } = authActions()
   const toast = useToast()
+  const {user} = useAuth()
 
   const handleError = (message)=>{
     return toast({
@@ -57,6 +59,7 @@ const LoginForm = () =>{
   return(
     <>
       <HeaderButton
+          isHidden={user}
           onClick={onOpen}
           title="Login"
       />

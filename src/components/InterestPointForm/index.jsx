@@ -7,12 +7,14 @@ import { useState } from "react";
 import interestPointActions from "../../actions/insterestPoint";
 import { useToast } from "@chakra-ui/toast";
 import { HeaderButton } from "../HeaderButton";
+import { useAuth } from "../../providers/AuthProvider";
 
 
 const InterestPointForm = () =>{
   const {isOpen,onOpen,onClose} = useDisclosure();
   const {addInterestPoint} = interestPointActions()
   const toast = useToast();
+  const {user} = useAuth()
 
   const [label,setLabel] = useState("")
   const [lat,setLat] = useState("")
@@ -58,6 +60,7 @@ const InterestPointForm = () =>{
       <HeaderButton
         onClick={onOpen}
         title="Set interest point"
+        isHidden={!user?.uid}
       />
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
