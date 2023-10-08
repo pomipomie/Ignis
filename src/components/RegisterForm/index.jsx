@@ -33,6 +33,12 @@ const RegisterForm = () =>{
     })
   }
 
+  const handleClose = ()=>{
+    setSignUpEmail("")
+    setSignUpPassword("")
+    onClose()
+  }
+
   const handleRegister = async (type)=>{
 
     if(type === "email"){
@@ -49,9 +55,7 @@ const RegisterForm = () =>{
         duration: 9000,
         isClosable: true,
       });
-      onClose();
-      setSignUpEmail("")
-      setSignUpPassword("")
+      handleClose()
     }catch(e){
       handleError(e?.message)
     }
@@ -64,7 +68,7 @@ const RegisterForm = () =>{
           onClick={onOpen}
           title="Sign Up"
       />
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={handleClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>SIGN UP</ModalHeader>
