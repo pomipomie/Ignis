@@ -8,10 +8,13 @@ import { Text } from "@chakra-ui/layout";
 import { HeaderButton } from "../HeaderButton";
 
 import { useToast } from "@chakra-ui/toast";
+import { useAuth } from "../../providers/AuthProvider";
 
 const RegisterForm = () =>{
   const {isOpen,onOpen,onClose} = useDisclosure();
   const toast = useToast()
+  const {user} = useAuth()
+
   const {
     signUpEmail,
     setSignUpEmail,
@@ -57,6 +60,7 @@ const RegisterForm = () =>{
   return(
     <>
       <HeaderButton
+          isHidden={user}
           onClick={onOpen}
           title="Sign Up"
       />

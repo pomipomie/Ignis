@@ -7,6 +7,7 @@ import phoneActions from "../../actions/phone";
 import { useState } from "react";
 import { useToast } from "@chakra-ui/toast";
 import { HeaderButton } from '../HeaderButton';
+import { useAuth } from "../../providers/AuthProvider";
 
 
 const PhoneForm = () =>{
@@ -17,6 +18,8 @@ const PhoneForm = () =>{
 
   const [phone,setPhone] = useState("")
   const toast = useToast()
+  const {user} = useAuth()
+
 
   const handleAddPhone = async ()=>{
     if(phone[0] !== "+"){
@@ -48,6 +51,7 @@ const PhoneForm = () =>{
       <HeaderButton
           onClick={onOpen}
           title="Set Phone"
+          isHidden={!user?.uid}
       />
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

@@ -1,6 +1,6 @@
 import { Button } from '@chakra-ui/react';
 
-export const HeaderButton = ({onClick, title}) => {
+export const HeaderButton = ({onClick, title,isHidden}) => {
 
     return(
         <Button
@@ -9,6 +9,7 @@ export const HeaderButton = ({onClick, title}) => {
                 base: 'sm'
             }}
             colorScheme='pink'
+            display={isHidden ? "none" : "inherit"}
         >
             {title}
         </Button>
