@@ -103,6 +103,10 @@ export const Project = () => {
             >
                 Stage 5:
             </Heading>
+            <Text>Application Communication with External Services
+--Email, messaging, SMS, push notifications, emergency system (shortwave system for emergencies).
+
+REST API to provide data to any application that needs it.</Text>
         </Flex>
     );
 }
