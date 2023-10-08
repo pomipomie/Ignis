@@ -44,23 +44,27 @@ function App() {
       <Flex 
         id='header'
         height={`${100-scrollPosition*10}vh`}
-        minH="10vh"
+        minH="max-content"
         maxH="100vh"
         overflow="hidden"
         justifyContent="center"
         alignItems="center"
+        direction="column"
       >
         <Heading
-          color={'blue.100'}
+          color={'purple.100'}
           paddingY="2vh"
         >
           IGNIS APP
         </Heading>
-      </Flex>
-      <Flex 
+        <Flex 
         as='nav'
         wrap="wrap"
         justifyContent="center"
+        paddingX="1vw"
+        paddingY={2}
+        gap={2}
+        // backgroundColor={'purple.200'}
       >
         <RegisterForm/>
           <LoginForm/>
@@ -70,6 +74,7 @@ function App() {
           />
         <PhoneForm/>
         <InterestPointForm/>
+      </Flex>
       </Flex>
     </Flex>
   )

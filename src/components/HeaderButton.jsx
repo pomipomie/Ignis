@@ -8,6 +8,7 @@ export const HeaderButton = ({onClick, title}) => {
             size={{
                 base: 'sm'
             }}
+            colorScheme='pink'
         >
             {title}
         </Button>
